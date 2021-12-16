@@ -1,3 +1,4 @@
+require('dotenv').config();
 // Modelo para Usuario
 const axios = require('axios');
 // Resultado de validacion de usuarios
@@ -6,7 +7,7 @@ const { validationResult } = require('express-validator');
 // Listado de todos los usuarios
 exports.getUsuarios = async(req, res) => {
     try {
-        let response = await axios.get('https://reqres.in/api/users');
+        let response = await axios.get(process.env.DB_URL);
         res.send(response.data);
     } catch (error) {
         console.log(error);
@@ -19,7 +20,7 @@ exports.getUsuariobyId = async(req, res) => {
     try {
         // revisar el ID 
         let usuarioId = req.params.id;
-        let response = await axios.get(`https://reqres.in/api/users/${usuarioId}`);
+        let response = await axios.get(process.env.DB_URL + '/' + usuarioId);
         res.send(response.data);
     } catch (error) {
         console.log(error);
@@ -44,7 +45,7 @@ exports.agregarUsuario = async(req, res) => {
         };
 
         // Peticion para crear el usuario
-        let response = await axios.post(`https://reqres.in/api/users`, payload)
+        let response = await axios.post(process.env.DB_URL, payload)
         res.send(response.data)
     } catch (error) {
         console.log(error);
@@ -71,7 +72,7 @@ exports.actualizarUsuario = async(req, res) => {
         // revisar el ID 
         let usuarioId = req.params.id;
         // Peticion para actualizar el usuario
-        let response = await axios.put(`https://reqres.in/api/users/${usuarioId}`, payload)
+        let response = await axios.put(process.env.DB_URL + '/' + usuarioId, payload)
         res.send(response.data)
     } catch (error) {
         console.log(error);
@@ -91,7 +92,7 @@ exports.eliminarUsuarios = async(req, res) => {
         }
 
         // Eliminar el Proyecto
-        await axios.delete(`https://reqres.in/api/users/${usuarioId}`);
+        await axios.delete(process.env.DB_URL + '/' + usuarioId);
         res.json({ msg: 'Usuario eliminado.'});
 
     } catch (error) {
