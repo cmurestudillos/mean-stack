@@ -1,4 +1,4 @@
-<app-header (addAction)="onChangeAction($event)"></app-header>
+<app-header (dataAction)="onChangeAction($event)"></app-header>
 
 <div *ngFor="let usuario of usuarios; index as i;" class="container">
     <mat-card class="shadow p-3 mb-3 mt-3 bg-body rounded">
@@ -14,10 +14,10 @@
                     <div class="p-2 bd-highlight">
                         <div class="d-flex flex-row bd-highlight">
                             <div class="p-2 bd-highlight">
-                                <button mat-button class="bg-warning" [routerLink]="['/usuario', usuario.id]">Editar</button>
+                                <app-edit-modal [tituloModal]="'Editar usuario'" [usuario]="usuario" (editAction)="onUpdAction($event)"></app-edit-modal>
                             </div>
                             <div class="p-2 bd-highlight">
-                                <button mat-button class="bg-danger" (click)="eliminarUsuario(usuarios[i].id)" >Eliminar</button>
+                                <button type="button" class="btn btn-danger" (click)="eliminarUsuario(usuarios[i].id)" >Eliminar</button>
                             </div>
                         </div>                        
                     </div>
@@ -30,4 +30,5 @@
         </div>
     </mat-card>
 </div>
+
 <app-footer></app-footer>

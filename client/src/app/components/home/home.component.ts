@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MeanService } from './../../services/mean.service';
 import Swal from 'sweetalert2';
+import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-home',
@@ -8,8 +9,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  usuarios!: any;
+  usuarios!: User[];
+  usuario!: User;
   actionList!: string;
+  editAction: boolean = false;
 
   constructor(public service: MeanService) { }
 
@@ -23,25 +26,30 @@ export class HomeComponent implements OnInit {
     }); 
   }
 
-  onChangeAction( $event: string ) {
+  onChangeAction( $event: any ) {
     this.usuarios.push($event);
+  }
+  
+  onUpdAction( $event: any ) {
+    this.usuarios = this.usuarios.map((item: any) => item.id === $event.id ? $event : item);
   }
 
   eliminarUsuario(id: number){
     // Verificar que va a eliminar el registro
     Swal.fire({
-      title:'¿Esta seguro de querer eliminar el registro?',
-      text: `Va a borrar el registro`,
-      icon: 'question',
-      showConfirmButton: true,
-      showCancelButton: true
-    }).then(resp => {
-      if(resp.value){
+      title: '¿Esta seguro de querer eliminar el registro?',
+      showCancelButton: true,
+      confirmButtonText: 'Confirmar',
+      confirmButtonColor: '#198757',
+      cancelButtonText: 'Cancelar',
+      cancelButtonColor: '#db3448',
+    }).then((result) => {
+      if (result.isConfirmed) {
         this.service.eliminarUsuario(id).subscribe(resp => {
           this.usuarios = this.usuarios.filter((value: any) => value.id !== id);
         });
       }
-    });
+    })    
   }
 
 }

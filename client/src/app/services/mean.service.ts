@@ -2,13 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { User } from './../interfaces/user';
+import { environment } from './../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MeanService {
 
-  private url:string = "http://localhost:4000/api/usuarios";
+  url:any = environment.apiUrl;
 
   constructor(private _http: HttpClient) { }
 
@@ -18,9 +20,17 @@ export class MeanService {
     }
 
     // Peticion para agregar usuario
-    agregarUsuario(usuario: any): Observable<any> {
+    agregarUsuario(usuario: User): Observable<any> {
       return this._http.post(`${this.url}`, usuario).pipe(map( (resp: any) => {
           return resp;
+        })
+      );
+    }
+
+    // Peticion para editar usuario
+    editarUsuario(id: number, usuario: User) {
+      return this._http.put(`${this.url}/${id}`, usuario).pipe(map( (res:any) => {
+        return res;
         })
       );
     }

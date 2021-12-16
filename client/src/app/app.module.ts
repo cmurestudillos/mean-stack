@@ -7,25 +7,25 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './modules/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';
-import { AddComponent } from './components/add/add.component';
-import { EditComponent } from './components/edit/edit.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { MeanService } from './services/mean.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './components/shared/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddModalComponent } from './components/actions/add-modal/add-modal.component';
+import { EditModalComponent } from './components/actions/edit-modal/edit-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    AddComponent,
-    EditComponent,
-    FooterComponent
+    FooterComponent,
+    AddModalComponent,
+    EditModalComponent
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     AppRoutingModule,
     MaterialModule,
     BrowserAnimationsModule,
