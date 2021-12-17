@@ -26,12 +26,26 @@ export class HomeComponent implements OnInit {
     }); 
   }
 
-  onChangeAction( $event: any ) {
+  onAddAction( $event: any ) {
     this.usuarios.push($event);
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Usuario añadido con exito.',
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
   
   onUpdAction( $event: any ) {
     this.usuarios = this.usuarios.map((item: any) => item.id === $event.id ? $event : item);
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Usuario modificado con exito.',
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
 
   eliminarUsuario(id: number){
@@ -48,6 +62,13 @@ export class HomeComponent implements OnInit {
         this.service.eliminarUsuario(id).subscribe(resp => {
           this.usuarios = this.usuarios.filter((value: any) => value.id !== id);
         });
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Usuario eliminado con exito.',
+          showConfirmButton: false,
+          timer: 1500
+        })        
       }
     })    
   }

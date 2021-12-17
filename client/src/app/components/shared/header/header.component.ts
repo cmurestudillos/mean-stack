@@ -6,14 +6,14 @@ import { Component, EventEmitter, OnInit, Output} from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  @Output() dataAction: EventEmitter<any> = new EventEmitter();
+  @Output() addAction: EventEmitter<any> = new EventEmitter();
   
   constructor() { }
 
   ngOnInit(): void { }
 
   onChangeData( $event: any ) {
-    this.dataAction.emit($event);
+    this.addAction.emit($event);
   }
 
 

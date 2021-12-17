@@ -1,4 +1,4 @@
-<app-header (dataAction)="onChangeAction($event)"></app-header>
+<app-header (addAction)="onAddAction($event)"></app-header>
 
 <div *ngFor="let usuario of usuarios; index as i;" class="container">
     <mat-card class="shadow p-3 mb-3 mt-3 bg-body rounded">
@@ -6,7 +6,7 @@
             <div class="p-2 w-100 bd-highlight">
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <div class="p-2 bd-highlight">
-                        <mat-card-title><u>Nombre:</u> {{usuario.first_name}}</mat-card-title>
+                        <mat-card-title><u>Nombre:</u> {{usuario.first_name}} {{usuario.last_name}}</mat-card-title>
                     </div>
                     <div class="p-2 bd-highlight">
                         <mat-card-subtitle><u>Email:</u> {{usuario.email}}</mat-card-subtitle>
