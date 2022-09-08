@@ -1,0 +1,34 @@
+<app-header (addAction)="onAddAction($event)"></app-header>
+
+<div *ngFor="let usuario of usuarios; index as i;" class="container">
+    <mat-card class="shadow p-3 mb-3 mt-3 bg-body rounded">
+        <div class="d-flex bd-highlight">
+            <div class="p-2 w-100 bd-highlight">
+                <div class="d-flex flex-column bd-highlight mb-3">
+                    <div class="p-2 bd-highlight">
+                        <mat-card-title><u>Nombre:</u> {{usuario.first_name}} {{usuario.last_name}}</mat-card-title>
+                    </div>
+                    <div class="p-2 bd-highlight">
+                        <mat-card-subtitle><u>Email:</u> {{usuario.email}}</mat-card-subtitle>
+                    </div>
+                    <div class="p-2 bd-highlight">
+                        <div class="d-flex flex-row bd-highlight">
+                            <div class="p-2 bd-highlight">
+                                <app-edit-modal [tituloModal]="'Editar usuario'" [usuario]="usuario" (editAction)="onUpdAction($event)"></app-edit-modal>
+                            </div>
+                            <div class="p-2 bd-highlight">
+                                <button type="button" class="btn btn-danger" (click)="eliminarUsuario(usuarios[i].id)" >Eliminar</button>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+            <div class="p-2 d-flex bd-highlight align-items-center">
+                <img *ngIf="usuario.avatar" mat-card-md-image [src]="usuario.avatar" class="rounded-circle" [alt]="usuarios[i].first_name" [title]="usuarios[i].first_name">
+                <img *ngIf="!usuario.avatar" mat-card-md-image src="https://www.w3schools.com/howto/img_avatar.png" class="rounded-circle" [alt]="usuarios[i].first_name" [title]="usuarios[i].first_name">
+            </div>
+        </div>
+    </mat-card>
+</div>
+
+<app-footer></app-footer>
