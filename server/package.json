@@ -6,8 +6,10 @@
   "description": "Ejemplo de MEAN usando la api \"https://randomuser.me/\"",
   "main": "index.js",
   "scripts": {
-    "start": "node .",
-    "dev": "nodemon ."
+    "dev": "npm run build:dev && nodemon .",
+    "start": "npm run build:prd && node .",
+    "build:dev": "cp .env.development .env",
+    "build:prd": "cp .env.production .env"
   },
   "keywords": [
     "node.js",
